@@ -1,0 +1,45 @@
+---
+import { t, type Locale } from "../../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+---
+
+<section class="py-20 md:py-28 px-6">
+  <div class="max-w-4xl mx-auto text-center mb-20" data-reveal>
+    <p class="eyebrow mb-5">STORY · CÂU CHUYỆN</p>
+    <h1 class="font-display text-4xl md:text-6xl text-ink mb-6 leading-tight tracking-tight">{tr.about.heading}</h1>
+    <p class="text-base md:text-lg text-ink-soft leading-relaxed">{tr.about.lead}</p>
+  </div>
+
+  {/* Timeline */}
+  <div class="max-w-3xl mx-auto mb-24">
+    <p class="eyebrow text-center mb-10" data-reveal>I — TIMELINE</p>
+    <ol class="space-y-8">
+      {tr.about.milestones.map((m, i) => (
+        <li class="grid grid-cols-[80px_1fr] gap-6 md:gap-8 items-baseline" data-reveal data-reveal-delay={(i % 4) + 1}>
+          <span class="font-display text-3xl text-jade-deep tabular text-right">{m.year}</span>
+          <p class="text-base text-ink leading-relaxed border-l border-ink/15 pl-5 md:pl-6 -ml-px">{m.event}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  {/* Values */}
+  <div class="max-w-6xl mx-auto" data-reveal>
+    <p class="eyebrow text-center mb-10">II — VALUES</p>
+    <div class="grid md:grid-cols-3 gap-6">
+      {tr.about.values.map((v, i) => (
+        <article class="border border-ink/10 p-7 hover:border-jade-deep transition-colors" data-reveal data-reveal-delay={i + 1}>
+          <p class="font-mono text-[10px] tracking-[0.22em] text-jade-deep uppercase mb-4">{String(i + 1).padStart(2, "0")}</p>
+          <h3 class="font-display text-2xl text-ink mb-4">{v.title}</h3>
+          <p class="text-sm text-ink-soft leading-relaxed">{v.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

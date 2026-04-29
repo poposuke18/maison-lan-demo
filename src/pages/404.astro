@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout locale="vi" page="home" description="Page not found">
+  <section class="min-h-[70vh] flex items-center justify-center px-6 py-24">
+    <div class="text-center max-w-lg" data-reveal>
+      <p class="font-mono text-xs tracking-[0.3em] text-jade-deep mb-6">404 · KHÔNG TÌM THẤY</p>
+      <h1 class="font-display text-4xl md:text-5xl text-ink mb-3 leading-tight">Phòng này,</h1>
+      <p class="font-display italic text-4xl md:text-5xl text-lacquer mb-8 leading-tight">không có trong nhà.</p>
+      <p class="text-base text-ink-soft mb-2">Nhưng năm phòng khác thì có.</p>
+      <p class="text-sm text-ink-soft mb-10">But the other five rooms are still here.</p>
+      <a href="/" class="inline-flex items-center gap-2 px-7 py-3 bg-jade-deep text-cream hover:bg-ink transition-colors text-sm tracking-wide">
+        Về trang chủ / Home <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

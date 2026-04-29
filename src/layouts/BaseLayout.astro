@@ -1,0 +1,106 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ZaloFAB from "../components/ZaloFAB.astro";
+import LodgingSchema from "../components/LodgingSchema.astro";
+import { t, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+  page: "home" | "rooms" | "book" | "about" | "visit";
+  description?: string;
+  title?: string;
+}
+
+const { locale, page, description, title } = Astro.props;
+const tr = t[locale];
+
+const titleMap: Record<Props["page"], string> = {
+  home: `${tr.siteName} — ${tr.siteTagline}`,
+  rooms: `${tr.rooms.heading} | ${tr.siteName}`,
+  book: `${tr.home.bookingHeading} | ${tr.siteName}`,
+  about: `${tr.about.heading} | ${tr.siteName}`,
+  visit: `${tr.visit.heading} | ${tr.siteName}`,
+};
+
+const descMap: Record<Props["page"], string> = {
+  home: tr.home.heroLead,
+  rooms: tr.rooms.lead,
+  book: tr.home.bookingLead,
+  about: tr.about.lead,
+  visit: tr.visit.directions,
+};
+
+const finalTitle = title ?? titleMap[page];
+const finalDescription = description ?? descMap[page];
+
+const skipLabel = locale === "vi" ? "Bỏ qua đến nội dung" : "Skip to main content";
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbf6ec" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{finalTitle}</title>
+    <meta name="description" content={finalDescription} />
+    <meta property="og:site_name" content={tr.siteName} />
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale === "vi" ? "vi_VN" : "en_US"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" hreflang="vi" href="/" />
+    <link rel="alternate" hreflang="en" href="/en/" />
+    <link rel="alternate" hreflang="x-default" href="/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    />
+    <LodgingSchema locale={locale} />
+  </head>
+  <body class="colonial-bg min-h-screen flex flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-ink focus:text-cream focus:rounded"
+    >
+      {skipLabel}
+    </a>
+    <Header locale={locale} page={page} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <ZaloFAB locale={locale} />
+
+    <script is:inline>
+      (function () {
+        if (typeof window === "undefined") return;
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "-40px" }
+        );
+        const observeNew = () => {
+          document.querySelectorAll("[data-reveal]:not(.is-visible)").forEach((el) => observer.observe(el));
+        };
+        observeNew();
+        const mo = new MutationObserver(observeNew);
+        mo.observe(document.body, { childList: true, subtree: true });
+      })();
+    </script>
+  </body>
+</html>

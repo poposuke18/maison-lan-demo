@@ -1,0 +1,50 @@
+---
+import { t, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BedAndBreakfast",
+  "name": "Maison Lan",
+  "alternateName": "Maison Lan Boutique Homestay",
+  "description": tr.home.heroLead,
+  "url": Astro.site?.toString() ?? "https://maison-lan-demo.vercel.app",
+  "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1600&q=80",
+  "priceRange": "$$",
+  "telephone": "+84978234567",
+  "email": "xinchao@maisonlan.vn",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "47 Alley 91 Nguyễn Đình Chiểu",
+    "addressLocality": "Phường Võ Thị Sáu, Quận 3",
+    "addressRegion": "Ho Chi Minh City",
+    "addressCountry": "VN",
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 10.7820, "longitude": 106.6920 },
+  "checkinTime": "14:00",
+  "checkoutTime": "12:00",
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Breakfast included", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Air conditioning", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Airport pickup", "value": true },
+  ],
+  "numberOfRooms": 5,
+  "petsAllowed": false,
+  "sameAs": [
+    "https://instagram.com/maisonlan.saigon",
+    "https://www.facebook.com/maisonlan",
+    "https://zalo.me/84978234567",
+  ],
+  "founder": { "@type": "Person", "name": "Lê Quang Dũng" },
+  "foundingDate": "2021",
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

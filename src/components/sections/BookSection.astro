@@ -1,0 +1,25 @@
+---
+import { t, type Locale } from "../../i18n/translations";
+import BookingClient from "../BookingClient";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+---
+
+<section class="py-20 px-6">
+  <div class="max-w-7xl mx-auto text-center mb-12" data-reveal>
+    <p class="eyebrow mb-4">BOOK · ĐẶT PHÒNG</p>
+    <h1 class="font-display text-4xl md:text-6xl text-ink mb-4 leading-tight">
+      {tr.home.bookingHeading} <span class="italic-display text-lacquer">{tr.home.bookingHeadingAccent}</span>
+    </h1>
+    <p class="text-base text-ink-soft max-w-xl mx-auto">{tr.home.bookingLead}</p>
+  </div>
+
+  <div class="max-w-3xl mx-auto" data-reveal data-reveal-delay="1">
+    <BookingClient locale={locale} client:load />
+  </div>
+</section>

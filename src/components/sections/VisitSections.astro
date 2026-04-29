@@ -1,0 +1,77 @@
+---
+import { t, type Locale } from "../../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+
+const exteriorImage =
+  "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1400&q=80";
+---
+
+<section class="py-20 px-6">
+  <div class="max-w-6xl mx-auto text-center mb-16" data-reveal>
+    <p class="eyebrow mb-4">VISIT · LIÊN HỆ</p>
+    <h1 class="font-display text-4xl md:text-6xl text-ink mb-6 leading-tight">{tr.visit.heading}</h1>
+    <p class="text-base text-ink-soft max-w-2xl mx-auto">{tr.visit.directions}</p>
+  </div>
+
+  <div class="max-w-6xl mx-auto aspect-[16/9] overflow-hidden bg-cream-soft mb-20" data-reveal>
+    <img src={exteriorImage} alt="" loading="eager" width="1400" height="787" class="w-full h-full object-cover" />
+  </div>
+
+  <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 mb-20">
+    <div data-reveal>
+      <p class="eyebrow mb-4">{locale === "vi" ? "ĐỊA CHỈ" : "ADDRESS"}</p>
+      <p class="font-display text-2xl text-ink leading-snug mb-3">47 Hẻm 91 Nguyễn Đình Chiểu</p>
+      <p class="text-sm text-ink-soft leading-relaxed">{tr.visit.address}</p>
+      <p class="text-sm text-ink-soft leading-relaxed mt-3">{tr.visit.directions}</p>
+      <div class="mt-6 pt-6 border-t border-ink/10">
+        <p class="eyebrow mb-3">{locale === "vi" ? "ĐỘ XA ĐI BỘ" : "WALKING DISTANCE"}</p>
+        <ul class="space-y-2 text-sm text-ink-soft">
+          {tr.visit.walkingDistance.map((w) => (
+            <li class="flex justify-between gap-3">
+              <span>{w.place}</span>
+              <span class="font-mono text-xs tabular text-jade-deep">{w.time}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div data-reveal data-reveal-delay="1">
+      <p class="eyebrow mb-4">{locale === "vi" ? "GIỜ" : "HOURS"}</p>
+      <p class="font-mono text-base tabular tracking-wider text-ink mb-3">{tr.visit.hours}</p>
+      <p class="text-sm text-ink-soft leading-relaxed">{tr.visit.flexible}</p>
+      <div class="mt-6 pt-6 border-t border-ink/10">
+        <p class="eyebrow mb-3">{locale === "vi" ? "ĐÓN TIỄN SÂN BAY" : "AIRPORT TRANSFER"}</p>
+        <p class="text-sm text-ink-soft leading-relaxed">{tr.visit.airportTransfer}</p>
+      </div>
+    </div>
+
+    <div data-reveal data-reveal-delay="2">
+      <p class="eyebrow mb-4">{locale === "vi" ? "LIÊN HỆ" : "CONTACT"}</p>
+      <a href={`tel:${tr.visit.phone.replace(/\s/g, "")}`} class="font-mono text-xl tabular tracking-wider text-ink hover:text-jade-deep transition-colors block mb-2">
+        {tr.visit.phone}
+      </a>
+      <a href={`mailto:${tr.visit.email}`} class="font-mono text-sm tabular tracking-wider text-ink-soft hover:text-jade-deep transition-colors block">
+        {tr.visit.email}
+      </a>
+      <a href="https://instagram.com/maisonlan.saigon" target="_blank" rel="noopener" class="font-mono text-sm tabular tracking-wider text-ink-soft hover:text-jade-deep transition-colors block mt-1">
+        {tr.visit.ig}
+      </a>
+
+      <div class="mt-6 flex flex-col gap-3">
+        <a href="https://zalo.me/84978234567" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0068ff] text-white hover:bg-[#0052cc] transition-colors text-sm tracking-wide">
+          <span class="font-mono font-bold text-xs">Zalo</span>{tr.visit.zalo}
+        </a>
+        <a href={`tel:${tr.visit.phone.replace(/\s/g, "")}`} class="inline-flex items-center gap-2 px-5 py-2.5 border border-ink text-ink hover:bg-ink hover:text-cream transition-colors text-sm tracking-wide">
+          {tr.callNow}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

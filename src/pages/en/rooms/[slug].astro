@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RoomDetailSection from "../../../components/sections/RoomDetailSection.astro";
+import { t } from "../../../i18n/translations";
+
+export function getStaticPaths() {
+  return t.en.rooms.list.map((room) => ({
+    params: { slug: room.slug },
+    props: { room },
+  }));
+}
+
+const { room } = Astro.props;
+---
+
+<BaseLayout locale="en" page="rooms" title={`${room.name} | Maison Lan`} description={room.description}>
+  <RoomDetailSection locale="en" room={room} />
+</BaseLayout>

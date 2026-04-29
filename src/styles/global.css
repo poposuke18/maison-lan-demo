@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  /* === Maison Lan — Indochine boutique homestay === */
+  --color-cream: #fbf6ec;
+  --color-cream-soft: #f3e9d4;
+  --color-oat: #ede4d0;
+  --color-ink: #2a221a;
+  --color-ink-soft: #6b5d4f;
+  --color-mist: #b8aa9a;
+  --color-jade: #3a5a40;
+  --color-jade-deep: #2a4530;
+  --color-jade-soft: #c9d4cb;
+  --color-lacquer: #a23b2c;
+  --color-lacquer-deep: #7a2c20;
+  --color-brass: #b89968;
+  --color-brass-deep: #8e7444;
+
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-sans: "Be Vietnam Pro", "Inter", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  letter-spacing: 0.005em;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--color-jade-deep);
+  opacity: 0.95;
+}
+
+.eyebrow-on-dark {
+  color: var(--color-brass);
+  opacity: 0.85;
+}
+
+.eyebrow-mute {
+  color: var(--color-ink-soft);
+  opacity: 0.7;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.price {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.price-brass {
+  color: var(--color-brass-deep);
+}
+
+.tag-line {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-jade-deep);
+  border: 1px solid currentColor;
+  padding: 0.2rem 0.55rem;
+}
+
+.tag-lacquer {
+  color: var(--color-lacquer);
+}
+
+.colonial-bg {
+  background-color: var(--color-cream);
+  background-image:
+    radial-gradient(circle at 80% 15%, rgba(184, 153, 104, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 15% 85%, rgba(58, 90, 64, 0.04) 0%, transparent 50%);
+}
+
+.italic-display {
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal-delay="1"] { transition-delay: 0.08s; }
+[data-reveal-delay="2"] { transition-delay: 0.16s; }
+[data-reveal-delay="3"] { transition-delay: 0.24s; }
+[data-reveal-delay="4"] { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

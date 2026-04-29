@@ -1,0 +1,58 @@
+---
+import { t, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+const prefix = locale === "vi" ? "" : `/${locale}`;
+---
+
+<footer class="mt-24 bg-ink text-cream">
+  <div class="max-w-7xl mx-auto px-6 py-16 md:py-20 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3 mb-4">
+        <span aria-hidden="true" class="block w-10 h-10 border border-cream flex items-center justify-center text-cream">
+          <span class="font-display italic text-lg leading-none">M</span>
+        </span>
+        <div>
+          <div class="font-display text-2xl tracking-tight">Maison Lan</div>
+          <div class="font-mono text-[10px] tracking-[0.22em] text-brass mt-0.5">COLONIAL VILLA · EST. 1923</div>
+        </div>
+      </div>
+      <p class="font-display italic text-lg text-cream/85 max-w-md leading-snug mb-3">{tr.footer.tagline}</p>
+      <p class="font-mono text-[10px] tracking-[0.2em] text-jade-soft mt-6">{tr.footer.builtWith}</p>
+    </div>
+
+    <div>
+      <p class="eyebrow eyebrow-on-dark mb-4">{tr.visit.heading}</p>
+      <p class="text-sm text-cream/80 leading-relaxed mb-3">{tr.visit.address}</p>
+      <p class="font-mono text-xs tabular tracking-wider text-cream/90 mb-1">{tr.visit.hours}</p>
+      <a href={`tel:${tr.visit.phone.replace(/\s/g, "")}`} class="font-mono text-sm tabular tracking-wider text-brass hover:text-cream transition-colors block mt-4">
+        {tr.visit.phone}
+      </a>
+      <p class="font-mono text-xs tabular tracking-wider text-cream/70 mt-1">{tr.visit.email}</p>
+    </div>
+
+    <div>
+      <p class="eyebrow eyebrow-on-dark mb-4">{locale === "vi" ? "Liên kết" : "Links"}</p>
+      <ul class="space-y-2 text-sm text-cream/80">
+        <li><a href={`${prefix}/`} class="hover:text-brass transition-colors">{tr.nav.home}</a></li>
+        <li><a href={`${prefix}/rooms`} class="hover:text-brass transition-colors">{tr.nav.rooms}</a></li>
+        <li><a href={`${prefix}/book`} class="hover:text-brass transition-colors">{tr.nav.book}</a></li>
+        <li><a href={`${prefix}/about`} class="hover:text-brass transition-colors">{tr.nav.about}</a></li>
+        <li><a href={`${prefix}/visit`} class="hover:text-brass transition-colors">{tr.nav.visit}</a></li>
+        <li class="pt-3"><a href="https://instagram.com/maisonlan.saigon" class="hover:text-brass transition-colors">{tr.visit.ig}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/10">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-2 font-mono text-[10px] tracking-[0.18em] text-cream/55">
+      <p>{tr.footer.copyright}</p>
+      <p>QUẬN 3 · TP. HỒ CHÍ MINH</p>
+    </div>
+  </div>
+</footer>

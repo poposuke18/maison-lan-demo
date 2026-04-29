@@ -1,0 +1,76 @@
+---
+import { t, type Locale } from "../../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+const prefix = locale === "vi" ? "" : `/${locale}`;
+---
+
+<section class="py-20 px-6">
+  <div class="max-w-7xl mx-auto text-center mb-16" data-reveal>
+    <p class="eyebrow mb-4">ROOMS · PHÒNG NGHỈ</p>
+    <h1 class="font-display text-4xl md:text-6xl text-ink mb-4 leading-tight">
+      {tr.rooms.heading.split(" ")[0]} <span class="italic-display text-jade-deep">{tr.rooms.heading.split(" ").slice(1).join(" ")}</span>
+    </h1>
+    <p class="text-base md:text-lg text-ink-soft max-w-2xl mx-auto">{tr.rooms.lead}</p>
+  </div>
+
+  <div class="max-w-6xl mx-auto space-y-20">
+    {tr.rooms.list.map((room, i) => (
+      <article class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center" data-reveal>
+        <div class={`aspect-[4/5] overflow-hidden bg-cream-soft ${i % 2 === 1 ? "md:order-2" : ""}`}>
+          <img src={room.image} alt={room.name} loading="lazy" width="1200" height="1500" class="w-full h-full object-cover" />
+        </div>
+        <div class={i % 2 === 1 ? "md:order-1" : ""}>
+          <p class="font-mono text-[11px] tracking-[0.22em] uppercase text-jade-deep mb-3">
+            <span class="text-ink-mute mr-2">{String(i + 1).padStart(2, "0")}</span>
+            {room.type}
+          </p>
+          <h2 class="font-display text-3xl md:text-4xl text-ink mb-5">{room.name}</h2>
+          <p class="text-base text-ink-soft leading-relaxed mb-8">{room.description}</p>
+
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-4 mb-8 pb-8 border-b border-ink/10">
+            <div>
+              <dt class="eyebrow mb-1">{tr.rooms.labels.size}</dt>
+              <dd class="text-sm text-ink">{room.size}</dd>
+            </div>
+            <div>
+              <dt class="eyebrow mb-1">{tr.rooms.labels.beds}</dt>
+              <dd class="text-sm text-ink">{room.beds}</dd>
+            </div>
+            <div>
+              <dt class="eyebrow mb-1">{tr.rooms.labels.capacity}</dt>
+              <dd class="text-sm text-ink">{room.capacity} {tr.persons}</dd>
+            </div>
+            <div>
+              <dt class="eyebrow mb-1">{tr.rooms.labels.pricePerNight}</dt>
+              <dd class="price text-base price-brass">{room.pricePerNight}</dd>
+            </div>
+          </dl>
+
+          <ul class="grid grid-cols-2 gap-x-4 gap-y-2 mb-10">
+            {room.features.map((f) => (
+              <li class="flex items-baseline gap-2 text-xs text-ink-soft">
+                <span class="text-jade-deep" aria-hidden="true">·</span>
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <a href={`${prefix}/rooms/${room.slug}`} class="inline-flex items-center gap-2 px-6 py-2.5 border border-ink text-ink hover:bg-ink hover:text-cream transition-colors text-sm tracking-wide">
+              {tr.rooms.detailCta}
+            </a>
+            <a href={`${prefix}/book?room=${room.slug}`} class="inline-flex items-center gap-2 px-6 py-2.5 bg-jade-deep text-cream hover:bg-ink transition-colors text-sm tracking-wide">
+              {tr.rooms.bookCta}<span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

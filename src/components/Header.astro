@@ -1,0 +1,93 @@
+---
+import { t, locales, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+  page: "home" | "rooms" | "book" | "about" | "visit";
+}
+
+const { locale, page } = Astro.props;
+const tr = t[locale];
+const prefix = locale === "vi" ? "" : `/${locale}`;
+
+const navItems = [
+  { key: "home", label: tr.nav.home, href: `${prefix}/` },
+  { key: "rooms", label: tr.nav.rooms, href: `${prefix}/rooms` },
+  { key: "about", label: tr.nav.about, href: `${prefix}/about` },
+  { key: "visit", label: tr.nav.visit, href: `${prefix}/visit` },
+] as const;
+
+const switchPaths: Record<Locale, Record<string, string>> = {
+  vi: { home: "/", rooms: "/rooms", book: "/book", about: "/about", visit: "/visit" },
+  en: { home: "/en/", rooms: "/en/rooms", book: "/en/book", about: "/en/about", visit: "/en/visit" },
+};
+---
+
+<header class="sticky top-0 z-40 backdrop-blur-md bg-cream/85 border-b border-ink/8">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+    <a href={`${prefix}/`} class="flex items-center gap-3 group" aria-label="Maison Lan">
+      <span aria-hidden="true" class="block w-9 h-9 border border-jade-deep flex items-center justify-center text-jade-deep group-hover:bg-jade-deep group-hover:text-cream transition-colors duration-300">
+        <span class="font-display italic text-base leading-none">M</span>
+      </span>
+      <div class="leading-tight">
+        <div class="font-display text-lg text-ink tracking-tight">Maison Lan</div>
+        <div class="font-mono text-[9px] tracking-[0.22em] text-ink-soft mt-0.5 hidden sm:block">EST. 1923 · DISTRICT 3</div>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-7" aria-label="Primary">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={`font-mono text-xs tracking-[0.18em] uppercase transition-colors duration-300 ${
+            item.key === page ? "text-jade-deep" : "text-ink-soft hover:text-jade-deep"
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={`${prefix}/book`}
+        class="hidden sm:inline-flex items-center gap-2 bg-jade-deep text-cream px-5 py-2 text-xs tracking-[0.04em] hover:bg-ink transition-colors duration-300"
+      >
+        {tr.bookNow}
+        <span aria-hidden="true">→</span>
+      </a>
+
+      <div class="flex items-center gap-1 text-xs">
+        {locales.map((loc, i) => (
+          <>
+            {i > 0 && <span class="text-ink/30">/</span>}
+            <a
+              href={switchPaths[loc][page]}
+              class={`px-2 py-1 transition-colors font-mono tracking-wider ${
+                loc === locale ? "text-jade-deep" : "text-ink-soft hover:text-jade-deep"
+              }`}
+              hreflang={loc}
+            >
+              {loc.toUpperCase()}
+            </a>
+          </>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <nav class="md:hidden border-t border-ink/8 bg-cream-soft/40" aria-label="Mobile">
+    <div class="max-w-7xl mx-auto px-2 py-1 flex items-center justify-around">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={`flex-1 text-center px-2 py-2 text-xs tracking-wide ${
+            item.key === page ? "text-jade-deep" : "text-ink-soft"
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>

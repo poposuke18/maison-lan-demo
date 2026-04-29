@@ -1,0 +1,158 @@
+---
+import { t, type Locale } from "../../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+const prefix = locale === "vi" ? "" : `/${locale}`;
+
+const heroImage =
+  "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1800&q=80";
+
+const courtyardImage =
+  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80";
+
+const rooms = tr.rooms.list.slice(0, 3);
+const testimonials = tr.testimonials.items;
+const amenities = tr.amenities;
+---
+
+<section class="relative min-h-[94vh] flex items-end overflow-hidden">
+  <div class="absolute inset-0">
+    <img src={heroImage} alt="" class="w-full h-full object-cover" fetchpriority="high" loading="eager" width="1800" height="1200" />
+    <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/45 to-ink/15"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-32 w-full">
+    <p class="font-mono text-[11px] tracking-[0.3em] text-jade-soft mb-8">{tr.home.heroEyebrow}</p>
+    <h1 class="font-display text-cream tracking-tight leading-[0.95] mb-8">
+      <span class="block text-5xl md:text-7xl lg:text-[7.5rem]">{tr.home.heroTitle}</span>
+      <span class="block text-5xl md:text-7xl lg:text-[7.5rem] italic-display text-brass">{tr.home.heroTitleAccent}</span>
+    </h1>
+    <p class="text-lg md:text-xl text-cream/85 font-light leading-relaxed max-w-2xl mb-10">{tr.home.heroLead}</p>
+    <div class="flex flex-wrap items-center gap-4 mb-10">
+      <a href={`${prefix}/book`} class="inline-flex items-center gap-2 px-7 py-3.5 bg-brass-deep text-cream hover:bg-ink transition-colors text-sm tracking-wide">
+        {tr.home.heroCta}<span aria-hidden="true">→</span>
+      </a>
+      <a href={`${prefix}/rooms`} class="inline-flex items-center gap-2 px-7 py-3.5 border border-cream/50 text-cream hover:bg-cream hover:text-ink transition-colors text-sm tracking-wide">
+        {tr.home.heroCtaSecondary}
+      </a>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="block w-1.5 h-1.5 bg-lacquer rounded-full" aria-hidden="true" />
+      <p class="font-mono text-[11px] tracking-[0.2em] text-cream/85 uppercase">{tr.home.directBookingLine}</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <div data-reveal data-reveal-delay="1" class="aspect-[4/5] overflow-hidden bg-cream-soft order-1 md:order-1">
+      <img src={courtyardImage} alt="" loading="lazy" width="1200" height="1500" class="w-full h-full object-cover" />
+    </div>
+    <div data-reveal class="order-2 md:order-2">
+      <p class="eyebrow mb-5">{tr.home.storyEyebrow}</p>
+      <h2 class="font-display text-3xl md:text-5xl text-ink mb-8 leading-tight">{tr.home.storyHeading}</h2>
+      <p class="text-base text-ink leading-relaxed mb-5">{tr.home.storyBody1}</p>
+      <p class="text-base text-ink leading-relaxed mb-10">{tr.home.storyBody2}</p>
+      <blockquote class="border-l-2 border-lacquer pl-6 py-1">
+        <p class="italic-display text-xl text-ink leading-snug mb-3">"{tr.home.storyQuote}"</p>
+        <cite class="font-mono text-[11px] tracking-[0.18em] text-ink-soft not-italic">{tr.home.storyQuoteAuthor}</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 px-6 bg-cream-soft/40">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-end justify-between gap-8 mb-12 flex-wrap" data-reveal>
+      <div>
+        <p class="eyebrow mb-4">{tr.home.roomsEyebrow}</p>
+        <h2 class="font-display text-3xl md:text-5xl text-ink mb-3">{tr.home.roomsHeading}</h2>
+        <p class="text-base text-ink-soft max-w-xl">{tr.home.roomsLead}</p>
+      </div>
+      <a href={`${prefix}/rooms`} class="font-mono text-xs tracking-wider text-jade-deep hover:text-ink transition-colors border-b border-jade-deep/40 pb-1">
+        {tr.home.roomsViewAll}
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {rooms.map((room, i) => (
+        <a href={`${prefix}/rooms/${room.slug}`} class="group block" data-reveal data-reveal-delay={i + 1}>
+          <div class="aspect-[4/5] overflow-hidden bg-cream-soft mb-5">
+            <img src={room.image} alt={room.name} loading="lazy" width="1200" height="1500" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          </div>
+          <p class="font-mono text-[10px] tracking-[0.2em] uppercase text-jade-deep mb-2">{room.type}</p>
+          <h3 class="font-display text-2xl text-ink mb-3 group-hover:text-jade-deep transition-colors">{room.name}</h3>
+          <p class="text-sm text-ink-soft mb-4 line-clamp-2 leading-relaxed">{room.description}</p>
+          <div class="flex items-baseline justify-between gap-3 pt-4 border-t border-ink/10">
+            <span class="font-mono text-[10px] tracking-[0.18em] uppercase text-ink-soft">{tr.sleeps} {room.capacity} {tr.persons}</span>
+            <span class="price text-base price-brass">{room.pricePerNight}<span class="text-ink-soft text-xs ml-1">{tr.perNight}</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12" data-reveal>
+      <p class="eyebrow mb-4">{tr.home.amenitiesEyebrow}</p>
+      <h2 class="font-display text-3xl md:text-5xl text-ink mb-3">{tr.home.amenitiesHeading}</h2>
+      <p class="text-base text-ink-soft max-w-xl mx-auto">{tr.home.amenitiesLead}</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-reveal>
+      {amenities.map((a) => (
+        <div class="border border-ink/10 px-5 py-4 flex items-center gap-3">
+          <span class="text-xl" aria-hidden="true">{a.icon}</span>
+          <span class="text-sm text-ink">{a.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="py-24 px-6 bg-ink text-cream">
+  <div class="max-w-6xl mx-auto">
+    <p class="eyebrow eyebrow-on-dark mb-10 text-center">VOICES</p>
+    <h2 class="font-display text-3xl md:text-5xl text-cream text-center mb-16 max-w-2xl mx-auto leading-tight">{tr.testimonials.heading}</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      {testimonials.map((tt, i) => (
+        <figure data-reveal data-reveal-delay={i + 1}>
+          <span class="block font-display italic text-6xl text-brass mb-2 leading-none" aria-hidden="true">"</span>
+          <blockquote class="italic-display text-lg text-cream leading-relaxed mb-5">{tt.quote}</blockquote>
+          <figcaption>
+            <p class="font-mono text-xs tracking-wider text-brass">{tt.author}</p>
+            <p class="font-mono text-[10px] tracking-[0.18em] text-cream/55 uppercase mt-1">{tt.role}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="py-24 px-6">
+  <div class="max-w-5xl mx-auto text-center" data-reveal>
+    <p class="eyebrow mb-5">{tr.home.bookingEyebrow}</p>
+    <h2 class="font-display mb-3 leading-[0.95]">
+      <span class="block text-4xl md:text-6xl text-ink">{tr.home.bookingHeading}</span>
+      <span class="block text-4xl md:text-6xl italic-display text-lacquer">{tr.home.bookingHeadingAccent}</span>
+    </h2>
+    <p class="text-base text-ink-soft max-w-xl mx-auto mt-6 mb-10">{tr.home.bookingLead}</p>
+
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href={`${prefix}/book`} class="inline-flex items-center gap-3 px-7 py-3.5 bg-jade-deep text-cream hover:bg-ink transition-colors text-sm tracking-wide">
+        {tr.home.bookingCta}<span aria-hidden="true">→</span>
+      </a>
+      <a href="https://zalo.me/84978234567" target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-7 py-3.5 bg-[#0068ff] text-white hover:bg-[#0052cc] transition-colors text-sm tracking-wide">
+        <span class="font-mono font-bold text-xs">Zalo</span>{tr.chatZalo}
+      </a>
+    </div>
+  </div>
+</section>

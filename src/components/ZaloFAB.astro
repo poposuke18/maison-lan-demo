@@ -1,0 +1,24 @@
+---
+import { t, type Locale } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const tr = t[locale];
+const zaloPhone = "84978234567";
+---
+
+<a
+  href={`https://zalo.me/${zaloPhone}`}
+  target="_blank"
+  rel="noopener"
+  class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-[#0068ff] text-white pl-3 pr-5 py-3 rounded-full shadow-lg hover:bg-[#0052cc] transition-colors"
+  aria-label={tr.chatZalo}
+>
+  <span class="block w-9 h-9 rounded-full bg-white text-[#0068ff] flex items-center justify-center font-mono font-bold text-sm" aria-hidden="true">
+    Zalo
+  </span>
+  <span class="font-sans text-sm tracking-wide pr-1 hidden sm:inline">{tr.chatZalo}</span>
+</a>
