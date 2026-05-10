@@ -18,38 +18,38 @@ export interface Room {
 }
 
 const ROOM_IMAGES = {
-  trang: "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=80",
-  vang: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80",
-  tim: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
-  xanh: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80",
-  do: "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=1200&q=80",
+  trang: "/images/trang-main.png",
+  vang: "/images/vang-main.png",
+  tim: "/images/tim-main.png",
+  xanh: "/images/xanh-main.png",
+  do: "/images/do-main.png",
 };
 
 const GALLERY_IMAGES = {
   trang: [
-    "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+    "/images/trang-main.png",
+    "/images/trang-detail.png",
+    "/images/trang-bathroom.png",
   ],
   vang: [
-    "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1551776235-dde6d482980b?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1631049035634-c12bf45c9bcb?auto=format&fit=crop&w=1200&q=80",
+    "/images/vang-main.png",
+    "/images/vang-detail.png",
+    "/images/vang-bathroom.png",
   ],
   tim: [
-    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1631049554369-0eed3517073a?auto=format&fit=crop&w=1200&q=80",
+    "/images/tim-main.png",
+    "/images/tim-detail.png",
+    "/images/tim-bathroom.png",
   ],
   xanh: [
-    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1571508601891-ca5e7a713859?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80",
+    "/images/xanh-main.png",
+    "/images/xanh-detail.png",
+    "/images/xanh-patio.png",
   ],
   do: [
-    "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80",
+    "/images/do-main.png",
+    "/images/do-detail.png",
+    "/images/do-bathroom.png",
   ],
 };
 

@@ -16,11 +16,11 @@ interface Room {
 }
 
 const ROOMS: Room[] = [
-  { slug: "lan-trang", name: "Lan Trắng", type: "Garden Suite", capacity: 2, pricePerNight: "2,350,000 ₫", pricePerNightUSD: 98, beds: "1 Queen", size: "28 m²", image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80" },
-  { slug: "lan-vang", name: "Lan Vàng", type: "Heritage Room", capacity: 2, pricePerNight: "1,870,000 ₫", pricePerNightUSD: 78, beds: "1 Queen", size: "22 m²", image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80" },
-  { slug: "lan-tim", name: "Lan Tím", type: "Family Suite", capacity: 4, pricePerNight: "3,240,000 ₫", pricePerNightUSD: 135, beds: "2 Queen", size: "35 m²", image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80" },
-  { slug: "lan-xanh", name: "Lan Xanh", type: "Patio Room", capacity: 2, pricePerNight: "2,040,000 ₫", pricePerNightUSD: 85, beds: "1 Queen", size: "24 m²", image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80" },
-  { slug: "lan-do", name: "Lan Đỏ", type: "Honeymoon Suite", capacity: 2, pricePerNight: "3,000,000 ₫", pricePerNightUSD: 125, beds: "1 King", size: "30 m²", image: "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=800&q=80" },
+  { slug: "lan-trang", name: "Lan Trắng", type: "Garden Suite", capacity: 2, pricePerNight: "2,350,000 ₫", pricePerNightUSD: 98, beds: "1 Queen", size: "28 m²", image: "/images/trang-main.png" },
+  { slug: "lan-vang", name: "Lan Vàng", type: "Heritage Room", capacity: 2, pricePerNight: "1,870,000 ₫", pricePerNightUSD: 78, beds: "1 Queen", size: "22 m²", image: "/images/vang-main.png" },
+  { slug: "lan-tim", name: "Lan Tím", type: "Family Suite", capacity: 4, pricePerNight: "3,240,000 ₫", pricePerNightUSD: 135, beds: "2 Queen", size: "35 m²", image: "/images/tim-main.png" },
+  { slug: "lan-xanh", name: "Lan Xanh", type: "Patio Room", capacity: 2, pricePerNight: "2,040,000 ₫", pricePerNightUSD: 85, beds: "1 Queen", size: "24 m²", image: "/images/xanh-main.png" },
+  { slug: "lan-do", name: "Lan Đỏ", type: "Honeymoon Suite", capacity: 2, pricePerNight: "3,000,000 ₫", pricePerNightUSD: 125, beds: "1 King", size: "30 m²", image: "/images/do-main.png" },
 ];
 
 interface Props {
